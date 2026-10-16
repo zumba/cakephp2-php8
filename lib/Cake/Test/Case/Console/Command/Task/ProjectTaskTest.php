@@ -32,6 +32,10 @@ App::uses('File', 'Utility');
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class ProjectTaskTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Task = null;
 
 /**
  * setUp method

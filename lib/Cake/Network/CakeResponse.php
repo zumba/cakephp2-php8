@@ -590,7 +590,7 @@ class CakeResponse {
 			if ($value === null && strpos($header, ':') !== false) {
 				list($header, $value) = explode(':', $header, 2);
 			}
-			$this->_headers[$header] = is_array($value) ? array_map('trim', $value) : trim($value);
+			$this->_headers[$header] = is_array($value) ? array_map('trim', $value) : trim((string)$value);
 		}
 		return $this->_headers;
 	}
@@ -750,7 +750,7 @@ class CakeResponse {
  * @return mixed string mapped mime type or false if $alias is not mapped
  */
 	public function getMimeType($alias) {
-		if (isset($this->_mimeTypes[$alias])) {
+		if ($alias !== null && isset($this->_mimeTypes[$alias])) {
 			return $this->_mimeTypes[$alias];
 		}
 		return false;
@@ -1102,7 +1102,7 @@ class CakeResponse {
  * @return bool
  */
 	public function outputCompressed() {
-		return strpos(env('HTTP_ACCEPT_ENCODING'), 'gzip') !== false
+		return strpos((string)env('HTTP_ACCEPT_ENCODING'), 'gzip') !== false
 			&& (ini_get("zlib.output_compression") === '1' || in_array('ob_gzhandler', ob_list_handlers()));
 	}
 
@@ -1378,7 +1378,7 @@ class CakeResponse {
 
 		$fileSize = $file->size();
 		if ($download) {
-			$agent = env('HTTP_USER_AGENT');
+			$agent = (string)env('HTTP_USER_AGENT');
 
 			if (preg_match('%Opera(/| )([0-9].[0-9]{1,2})%', $agent)) {
 				$contentType = 'application/octet-stream';

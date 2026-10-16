@@ -26,6 +26,15 @@ App::uses('View', 'View');
  * @package       Cake.Test.Case.View.Helper
  */
 class JqueryEngineHelperTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Jquery = null;
+
+/**
+ * @var mixed
+ */
+	public $View = null;
 
 /**
  * setUp

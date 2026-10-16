@@ -78,6 +78,10 @@ class XmlUser extends CakeTestModel {
  * @package       Cake.Test.Case.Utility
  */
 class XmlTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	protected $_appEncoding = null;
 
 /**
  * autoFixtures property

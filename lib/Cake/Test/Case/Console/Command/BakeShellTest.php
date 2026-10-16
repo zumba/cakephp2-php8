@@ -32,6 +32,10 @@ if (!class_exists('UsersController')) {
 }
 
 class BakeShellTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Shell = null;
 
 /**
  * fixtures

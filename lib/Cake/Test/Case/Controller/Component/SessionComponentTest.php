@@ -75,6 +75,10 @@ class OrangeSessionTestController extends Controller {
  * @package       Cake.Test.Case.Controller.Component
  */
 class SessionComponentTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $ComponentCollection = null;
 
 	protected static $_sessionBackup;
 

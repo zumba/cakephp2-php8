@@ -63,7 +63,9 @@ class CakeFixtureManagerTest extends CakeTestCase {
 		$fixtureManagerReflection = new ReflectionClass($fixtureManager);
 
 		$loadedProperty = $fixtureManagerReflection->getProperty('_loaded');
-		$loadedProperty->setAccessible(true);
+		if (PHP_VERSION_ID < 80100) {
+			$loadedProperty->setAccessible(true);
+		}
 		$loadedProperty->setValue($fixtureManager, array('core.uuid' => $MockFixture));
 
 		$TestCase = $this->getMock('CakeTestCase');
@@ -90,7 +92,9 @@ class CakeFixtureManagerTest extends CakeTestCase {
 		$fixtureManagerReflection = new ReflectionClass($fixtureManager);
 
 		$fixtureMapProperty = $fixtureManagerReflection->getProperty('_fixtureMap');
-		$fixtureMapProperty->setAccessible(true);
+		if (PHP_VERSION_ID < 80100) {
+			$fixtureMapProperty->setAccessible(true);
+		}
 		$fixtureMapProperty->setValue($fixtureManager, array('UuidFixture' => $MockFixture));
 
 		$dboMethods = array_diff(get_class_methods('DboSource'), array('enabled'));

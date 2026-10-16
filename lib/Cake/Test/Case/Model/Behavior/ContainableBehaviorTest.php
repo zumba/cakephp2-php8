@@ -27,6 +27,35 @@ require_once dirname(dirname(__FILE__)) . DS . 'models.php';
  * @package       Cake.Test.Case.Model.Behavior
  */
 class ContainableBehaviorTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Article = null;
+
+/**
+ * @var mixed
+ */
+	public $JoinA = null;
+
+/**
+ * @var mixed
+ */
+	public $JoinB = null;
+
+/**
+ * @var mixed
+ */
+	public $JoinC = null;
+
+/**
+ * @var mixed
+ */
+	public $Tag = null;
+
+/**
+ * @var mixed
+ */
+	public $User = null;
 
 /**
  * Fixtures associated with this test case

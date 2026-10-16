@@ -24,6 +24,10 @@ App::uses('MailTransport', 'Network/Email');
  * Test case
  */
 class MailTransportTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $MailTransport = null;
 
 /**
  * Setup

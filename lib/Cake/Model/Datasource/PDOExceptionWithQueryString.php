@@ -5,6 +5,13 @@ class PDOExceptionWithQueryString extends PDOException {
 	public string $queryString = "";
 
 /**
+ * Bound parameters of the failed query, displayed by the pdo_error view.
+ *
+ * @var array|null
+ */
+	public $params = null;
+
+/**
  * Wrapper for PDOException to avoid creating dynamic property.
  *
  * @param PDOException $e Source exception.

@@ -86,6 +86,10 @@ class CustomJsonView extends JsonView {
  * @package       Cake.Test.Case.Controller.Component
  */
 class RequestHandlerComponentTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	protected $_extensions = null;
 
 /**
  * Controller property
@@ -442,7 +446,9 @@ class RequestHandlerComponentTest extends CakeTestCase {
 		$this->Controller->request->expects($this->once())
 			->method('_readInput')
 			->will($this->returnValue('"A","csv","string"'));
-		$this->RequestHandler->addInputType('csv', array('str_getcsv'));
+		$this->RequestHandler->addInputType('csv', array(function ($input) {
+			return str_getcsv($input, ',', '"', '\\');
+		}));
 		$this->RequestHandler->startup($this->Controller);
 		$expected = array(
 			'A', 'csv', 'string'

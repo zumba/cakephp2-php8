@@ -301,6 +301,35 @@ class TestViewEventListener implements CakeEventListener {
  * @package       Cake.Test.Case.View
  */
 class ViewTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Controller = null;
+
+/**
+ * @var mixed
+ */
+	public $PostsController = null;
+
+/**
+ * @var mixed
+ */
+	public $ThemeController = null;
+
+/**
+ * @var mixed
+ */
+	public $ThemePostsController = null;
+
+/**
+ * @var mixed
+ */
+	public $ThemeView = null;
+
+/**
+ * @var mixed
+ */
+	public $View = null;
 
 /**
  * Fixtures used in this test.

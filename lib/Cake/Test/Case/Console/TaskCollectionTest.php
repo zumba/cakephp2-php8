@@ -31,6 +31,10 @@ class DbConfigAliasedTask extends Shell {
  * @package       Cake.Test.Case.Console
  */
 class TaskCollectionTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Tasks = null;
 
 /**
  * setUp

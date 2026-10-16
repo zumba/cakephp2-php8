@@ -135,7 +135,7 @@ class ErrorHandler {
 			);
 
 			static::$_bailExceptionRendering = true;
-			trigger_error($message, E_USER_ERROR);
+			static::handleFatalError(E_USER_ERROR, $message, $e->getFile(), $e->getLine());
 		}
 	}
 

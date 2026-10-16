@@ -116,6 +116,10 @@ class Html5TestHelper extends TestHtmlHelper {
  * @package       Cake.Test.Case.View.Helper
  */
 class HtmlHelperTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $View = null;
 
 /**
  * Regexp for CDATA start block

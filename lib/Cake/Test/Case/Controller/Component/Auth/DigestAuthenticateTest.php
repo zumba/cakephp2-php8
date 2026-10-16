@@ -29,6 +29,25 @@ require_once CAKE . 'Test' . DS . 'Case' . DS . 'Model' . DS . 'models.php';
  * @package       Cake.Test.Case.Controller.Component.Auth
  */
 class DigestAuthenticateTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Collection = null;
+
+/**
+ * @var mixed
+ */
+	public $auth = null;
+
+/**
+ * @var mixed
+ */
+	public $response = null;
+
+/**
+ * @var mixed
+ */
+	public $server = null;
 
 /**
  * Fixtures

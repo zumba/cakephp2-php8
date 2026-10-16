@@ -45,6 +45,10 @@ class TestCompletionStringOutput extends ConsoleOutput {
  * @package       Cake.Test.Case.Console.Command
  */
 class CompletionShellTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Shell = null;
 
 /**
  * setUp method

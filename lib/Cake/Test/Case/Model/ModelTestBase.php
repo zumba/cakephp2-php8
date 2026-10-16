@@ -27,6 +27,10 @@ require_once dirname(__FILE__) . DS . 'models.php';
  * @package       Cake.Test.Case.Model
  */
 abstract class BaseModelTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $debug = null;
 
 /**
  * autoFixtures property

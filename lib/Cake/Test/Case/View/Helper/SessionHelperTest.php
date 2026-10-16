@@ -26,6 +26,15 @@ App::uses('SessionHelper', 'View/Helper');
  * @package       Cake.Test.Case.View.Helper
  */
 class SessionHelperTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Session = null;
+
+/**
+ * @var mixed
+ */
+	public $View = null;
 
 /**
  * setUp method

@@ -30,6 +30,10 @@ App::uses('TemplateTask', 'Console/Command/Task');
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class TemplateTaskTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Task = null;
 
 /**
  * setUp method

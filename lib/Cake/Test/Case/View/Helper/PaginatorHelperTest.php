@@ -32,6 +32,15 @@ if (!defined('FULL_BASE_URL')) {
  * @package       Cake.Test.Case.View.Helper
  */
 class PaginatorHelperTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Paginator = null;
+
+/**
+ * @var mixed
+ */
+	public $View = null;
 
 /**
  * setUp method

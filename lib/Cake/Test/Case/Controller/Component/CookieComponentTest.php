@@ -56,6 +56,10 @@ class CookieComponentTestController extends Controller {
  * @package       Cake.Test.Case.Controller.Component
  */
 class CookieComponentTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Cookie = null;
 
 /**
  * Controller property

@@ -42,6 +42,10 @@ class TestTestShell extends TestShell {
  * @package       Cake.Test.Case.Console.Command
  */
 class TestShellTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Shell = null;
 
 /**
  * setUp test case

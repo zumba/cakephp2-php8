@@ -25,6 +25,10 @@ App::uses('CakeNumber', 'Utility');
  * @package       Cake.Test.Case.Utility
  */
 class CakeNumberTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Number = null;
 
 /**
  * setUp method

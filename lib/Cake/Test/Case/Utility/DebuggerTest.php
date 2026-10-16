@@ -86,7 +86,8 @@ class DebuggerTest extends CakeTestCase {
 		$this->assertTrue(is_array($result));
 		$this->assertEquals(4, count($result));
 
-		$pattern = '/<code>.*?<span style\="color\: \#\d+">.*?&lt;\?php/';
+		// PHP 8.3 changed highlight_string() output to `<code style="...">` and hexadecimal colors
+		$pattern = '/<code( style\="color\: \#[0-9A-F]+")?>.*?<span style\="color\: \#[0-9A-F]+">.*?&lt;\?php/';
 		$this->assertMatchesRegularExpression($pattern, $result[0]);
 
 		$result = Debugger::excerpt(__FILE__, 11, 2);

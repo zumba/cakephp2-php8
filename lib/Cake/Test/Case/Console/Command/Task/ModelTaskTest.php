@@ -33,6 +33,10 @@ App::uses('ModelTask', 'Console/Command/Task');
  * @property   ModelTask $Task
  */
 class ModelTaskTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Task = null;
 
 /**
  * fixtures

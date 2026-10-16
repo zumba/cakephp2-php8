@@ -352,6 +352,20 @@ class AuthEventTestListener {
  * @package       Cake.Test.Case.Controller.Component
  */
 class AuthComponentTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Auth = null;
+
+/**
+ * @var mixed
+ */
+	public $AuthUser = null;
+
+/**
+ * @var mixed
+ */
+	public $Controller = null;
 
 /**
  * name property

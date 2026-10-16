@@ -30,6 +30,10 @@ require_once dirname(dirname(__FILE__)) . DS . 'models.php';
  * @package       Cake.Test.Case.Model.Behavior
  */
 class TreeBehaviorUuidTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Tree = null;
 
 /**
  * Whether backup global state for each test method or not

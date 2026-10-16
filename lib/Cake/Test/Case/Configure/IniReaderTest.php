@@ -24,6 +24,10 @@ App::uses('IniReader', 'Configure');
  * @package       Cake.Test.Case.Configure
  */
 class IniReaderTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $path = null;
 
 /**
  * Test data to serialize and unserialize.

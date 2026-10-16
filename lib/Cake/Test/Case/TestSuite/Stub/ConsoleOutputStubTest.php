@@ -18,6 +18,10 @@ App::uses("ConsoleOutputStub", "TestSuite/Stub");
  * ConsoleOutputStub test
  */
 class ConsoleOutputStubTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $stub = null;
 
 /**
  * setUp method

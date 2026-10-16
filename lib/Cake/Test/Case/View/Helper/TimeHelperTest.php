@@ -51,6 +51,10 @@ class CakeTimeMock {
  * @package       Cake.Test.Case.View.Helper
  */
 class TimeHelperTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $View = null;
 
 	public $Time = null;
 

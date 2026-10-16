@@ -48,6 +48,10 @@ class TestMemcacheEngine extends MemcacheEngine {
  * @package       Cake.Test.Case.Cache.Engine
  */
 class MemcacheEngineTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	protected $_cacheDisable = null;
 
 /**
  * setUp method

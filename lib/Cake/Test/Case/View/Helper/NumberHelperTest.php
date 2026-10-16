@@ -46,6 +46,10 @@ class CakeNumberMock {
  * @package       Cake.Test.Case.View.Helper
  */
 class NumberHelperTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $View = null;
 
 /**
  * setUp method

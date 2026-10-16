@@ -203,7 +203,7 @@ class FixtureTask extends BakeTask {
 		if (!isset($options['records']) && $this->interactive) {
 			$prompt = __d('cake_console', "Would you like to build this fixture with data from %s's table?", $modelName);
 			$fromTable = $this->in($prompt, array('y', 'n'), 'n');
-			if (strtolower($fromTable) === 'y') {
+			if (strtolower((string)$fromTable) === 'y') {
 				$options['fromTable'] = true;
 			}
 		}

@@ -161,6 +161,15 @@ class DboFourthTestSource extends DboSource {
  * @package       Cake.Test.Case.Model.Datasource
  */
 class DboSourceTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Model = null;
+
+/**
+ * @var mixed
+ */
+	public $testDb = null;
 
 /**
  * autoFixtures property
@@ -2151,7 +2160,9 @@ class DboSourceTest extends CakeTestCase {
 		$this->db->query('SELECT 2');
 
 		$property = new ReflectionProperty($this->db, '_queryCache');
-		$property->setAccessible(true);
+		if (PHP_VERSION_ID < 80100) {
+			$property->setAccessible(true);
+		}
 
 		$this->assertCount(2, $property->getValue($this->db));
 

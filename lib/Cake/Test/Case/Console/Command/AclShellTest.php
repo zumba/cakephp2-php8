@@ -29,6 +29,10 @@ App::uses('ComponentCollection', 'Controller');
  * @package       Cake.Test.Case.Console.Command
  */
 class AclShellTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Task = null;
 
 /**
  * Fixtures

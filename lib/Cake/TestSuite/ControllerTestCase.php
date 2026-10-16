@@ -39,6 +39,13 @@ class ControllerTestDispatcher extends Dispatcher {
 	public $testController = null;
 
 /**
+ * The response object used by the dispatched request
+ *
+ * @var CakeResponse
+ */
+	public $response = null;
+
+/**
  * Use custom routes during tests
  *
  * @var bool

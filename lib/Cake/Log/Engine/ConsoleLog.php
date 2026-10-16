@@ -48,8 +48,10 @@ class ConsoleLog extends BaseLog {
  */
 	public function __construct($config = array()) {
 		parent::__construct($config);
+		// The ConsoleOutput stream does not exist yet, so there is no handle to inspect with
+		// posix_isatty(). Keep the historical default: plain output wherever posix is available.
 		if ((DS === '\\' && !(bool)env('ANSICON') && env('ConEmuANSI') !== 'ON') ||
-			(function_exists('posix_isatty') && !posix_isatty($this->_output))
+			function_exists('posix_isatty')
 		) {
 			$outputAs = ConsoleOutput::PLAIN;
 		} else {

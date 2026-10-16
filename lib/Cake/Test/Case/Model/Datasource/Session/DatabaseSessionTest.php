@@ -38,6 +38,10 @@ class SessionTestModel extends Model {
  * @package       Cake.Test.Case.Model.Datasource.Session
  */
 class DatabaseSessionTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $storage = null;
 
 	protected static $_sessionBackup;
 

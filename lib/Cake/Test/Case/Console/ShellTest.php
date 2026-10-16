@@ -121,6 +121,10 @@ class TestBananaTask extends Shell {
  * @package       Cake.Test.Case.Console.Command
  */
 class ShellTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Shell = null;
 
 /**
  * Fixtures used in this test case

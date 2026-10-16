@@ -61,6 +61,15 @@ class SmtpTestTransport extends SmtpTransport {
  * Test case
  */
 class SmtpTransportTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $SmtpTransport = null;
+
+/**
+ * @var mixed
+ */
+	public $socket = null;
 
 /**
  * Setup

@@ -70,11 +70,10 @@ class Configure {
 			static::_appDefaults();
 
 			if (!include CONFIG . 'core.php') {
-				trigger_error(__d('cake_dev',
-						"Can't find application core file. Please create %s, and make sure it is readable by PHP.",
-						CONFIG . 'core.php'),
-					E_USER_ERROR
-				);
+				throw new ConfigureException(__d('cake_dev',
+					"Can't find application core file. Please create %s, and make sure it is readable by PHP.",
+					CONFIG . 'core.php'
+				));
 			}
 			App::init();
 			App::$bootstrapping = false;
@@ -96,11 +95,10 @@ class Configure {
 			static::_setErrorHandlers($error, $exception);
 
 			if (!include CONFIG . 'bootstrap.php') {
-				trigger_error(__d('cake_dev',
-						"Can't find application bootstrap file. Please create %s, and make sure it is readable by PHP.",
-						CONFIG . 'bootstrap.php'),
-					E_USER_ERROR
-				);
+				throw new ConfigureException(__d('cake_dev',
+					"Can't find application bootstrap file. Please create %s, and make sure it is readable by PHP.",
+					CONFIG . 'bootstrap.php'
+				));
 			}
 			restore_error_handler();
 
@@ -209,6 +207,9 @@ class Configure {
  * @return array|null
  */
 	public static function consume($var) {
+		if ($var === null) {
+			return null;
+		}
 		$simple = strpos($var, '.') === false;
 		if ($simple && !isset(static::$_values[$var])) {
 			return null;

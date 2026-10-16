@@ -41,7 +41,7 @@ if (!$found) {
 	} elseif (file_exists($rootInstall)) {
 		include $rootInstall;
 	} else {
-		trigger_error('Could not locate CakePHP core files.', E_USER_ERROR);
+		throw new RuntimeException('Could not locate CakePHP core files.');
 	}
 	unset($rootInstall, $composerInstall);
 

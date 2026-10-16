@@ -21,6 +21,15 @@ App::uses("ConsoleOutputStub", "TestSuite/Stub");
  * @property TableShellHelper $helper
  */
 class TableShellHelperTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $consoleOutput = null;
+
+/**
+ * @var mixed
+ */
+	public $helper = null;
 
 /**
  * setUp method

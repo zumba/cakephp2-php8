@@ -21,6 +21,15 @@ App::uses("ConsoleOutputStub", "TestSuite/Stub");
  * @property ProgressShellHelper $helper
  */
 class ProgressShellHelperTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $consoleOutput = null;
+
+/**
+ * @var mixed
+ */
+	public $helper = null;
 
 /**
  * setUp method

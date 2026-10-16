@@ -24,6 +24,10 @@ App::uses('ConsoleErrorHandler', 'Console');
  * @package       Cake.Test.Case.Console
  */
 class ConsoleErrorHandlerTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Error = null;
 
 /**
  * setup, create mocks
@@ -161,7 +165,9 @@ class ConsoleErrorHandlerTest extends CakeTestCase {
 
 		$class = new ReflectionClass('Exception');
 		$property = $class->getProperty('code');
-		$property->setAccessible(true);
+		if (PHP_VERSION_ID < 80100) {
+			$property->setAccessible(true);
+		}
 		$property->setValue($exception, '42S22');
 
 		ConsoleErrorHandler::$stderr->expects($this->once())->method('write')

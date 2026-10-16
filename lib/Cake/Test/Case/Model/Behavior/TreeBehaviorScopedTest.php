@@ -29,6 +29,20 @@ require_once dirname(dirname(__FILE__)) . DS . 'models.php';
  * @package       Cake.Test.Case.Model.Behavior
  */
 class TreeBehaviorScopedTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Ad = null;
+
+/**
+ * @var mixed
+ */
+	public $Tree = null;
+
+/**
+ * @var mixed
+ */
+	public $TreeTwo = null;
 
 /**
  * Whether backup global state for each test method or not

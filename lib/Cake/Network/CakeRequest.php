@@ -32,6 +32,7 @@ App::uses('Hash', 'Utility');
  * @property array $pass        Array of passed arguments parsed from the URL.
  * @package       Cake.Network
  */
+#[\AllowDynamicProperties]
 class CakeRequest implements ArrayAccess {
 
 /**
@@ -171,10 +172,10 @@ class CakeRequest implements ArrayAccess {
 		if ($_POST) {
 			$this->data = $_POST;
 		} elseif (($this->is('put') || $this->is('delete')) &&
-			strpos($this->contentType(), 'application/x-www-form-urlencoded') === 0
+			strpos((string)$this->contentType(), 'application/x-www-form-urlencoded') === 0
 		) {
 				$data = $this->_readInput();
-				parse_str($data, $this->data);
+				parse_str((string)$data, $this->data);
 		}
 		if (ini_get('magic_quotes_gpc') === '1') {
 			$this->data = stripslashes_deep($this->data);
@@ -1030,7 +1031,7 @@ class CakeRequest implements ArrayAccess {
 		$args = func_get_args();
 		if (!empty($args)) {
 			$callback = array_shift($args);
-			array_unshift($args, $input);
+			array_unshift($args, (string)$input);
 			return call_user_func_array($callback, $args);
 		}
 		return $input;

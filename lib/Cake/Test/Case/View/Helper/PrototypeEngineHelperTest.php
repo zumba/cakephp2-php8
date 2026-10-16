@@ -26,6 +26,15 @@ App::uses('PrototypeEngineHelper', 'View/Helper');
  * @package       Cake.Test.Case.View.Helper
  */
 class PrototypeEngineHelperTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Proto = null;
+
+/**
+ * @var mixed
+ */
+	public $View = null;
 
 /**
  * setUp

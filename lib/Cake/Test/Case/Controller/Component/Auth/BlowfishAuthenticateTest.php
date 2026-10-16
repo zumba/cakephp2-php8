@@ -31,6 +31,20 @@ require_once CAKE . 'Test' . DS . 'Case' . DS . 'Model' . DS . 'models.php';
  * @package	Cake.Test.Case.Controller.Component.Auth
  */
 class BlowfishAuthenticateTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Collection = null;
+
+/**
+ * @var mixed
+ */
+	public $auth = null;
+
+/**
+ * @var mixed
+ */
+	public $response = null;
 
 	public $fixtures = array('core.user', 'core.auth_user');
 

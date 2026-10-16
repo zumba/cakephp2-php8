@@ -681,9 +681,9 @@ class Postgres extends DboSource {
  */
 	public function limit($limit, $offset = null) {
 		if ($limit) {
-			$rt = sprintf(' LIMIT %u', $limit);
+			$rt = sprintf(' LIMIT %u', $this->_limitValue($limit));
 			if ($offset) {
-				$rt .= sprintf(' OFFSET %u', $offset);
+				$rt .= sprintf(' OFFSET %u', $this->_limitValue($offset));
 			}
 			return $rt;
 		}

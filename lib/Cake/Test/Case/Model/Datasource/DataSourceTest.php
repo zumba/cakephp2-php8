@@ -94,6 +94,15 @@ class TestSource extends DataSource {
  * @package       Cake.Test.Case.Model.Datasource
  */
 class DataSourceTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Model = null;
+
+/**
+ * @var mixed
+ */
+	public $Source = null;
 
 /**
  * Name of test source

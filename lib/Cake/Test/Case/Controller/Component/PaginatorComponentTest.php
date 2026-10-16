@@ -284,6 +284,20 @@ class PaginatorCustomPost extends CakeTestModel {
 }
 
 class PaginatorComponentTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Controller = null;
+
+/**
+ * @var mixed
+ */
+	public $Paginator = null;
+
+/**
+ * @var mixed
+ */
+	public $request = null;
 
 /**
  * fixtures property

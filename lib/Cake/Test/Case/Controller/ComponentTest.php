@@ -200,6 +200,10 @@ class SomethingWithEmailComponent extends Component {
  * @package       Cake.Test.Case.Controller
  */
 class ComponentTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	protected $_pluginPaths = null;
 
 /**
  * setUp method

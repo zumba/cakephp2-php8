@@ -26,6 +26,15 @@ App::uses('MootoolsEngineHelper', 'View/Helper');
  * @package       Cake.Test.Case.View.Helper
  */
 class MootoolsEngineHelperTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Moo = null;
+
+/**
+ * @var mixed
+ */
+	public $View = null;
 
 /**
  * setUp

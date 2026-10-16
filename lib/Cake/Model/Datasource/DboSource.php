@@ -3068,13 +3068,38 @@ class DboSource extends DataSource {
 			$rt = ' LIMIT';
 
 			if ($offset) {
-				$rt .= sprintf(' %u,', $offset);
+				$rt .= sprintf(' %u,', $this->_limitValue($offset));
 			}
 
-			$rt .= sprintf(' %u', $limit);
+			$rt .= sprintf(' %u', $this->_limitValue($limit));
 			return $rt;
 		}
 		return null;
+	}
+
+/**
+ * Normalizes a LIMIT/OFFSET value so that it can be formatted with sprintf('%u').
+ *
+ * Floats that do not fit into an integer (for example a page number taken from the URL that is
+ * far too large) are clamped instead of being cast, which PHP 8.5 reports as a deprecation.
+ *
+ * @param mixed $value The limit or offset value.
+ * @return mixed Integer when the value was a float or a numeric string, the original value otherwise.
+ */
+	protected function _limitValue($value) {
+		if (is_string($value) && is_numeric($value)) {
+			$value = $value + 0;
+		}
+		if (is_float($value)) {
+			if (!is_finite($value) || $value >= (float)PHP_INT_MAX) {
+				return PHP_INT_MAX;
+			}
+			if ($value <= (float)PHP_INT_MIN) {
+				return PHP_INT_MIN;
+			}
+			return (int)$value;
+		}
+		return $value;
 	}
 
 /**

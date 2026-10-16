@@ -117,6 +117,15 @@ class OptionEngineHelper extends JsBaseEngineHelper {
  * @package       Cake.Test.Case.View.Helper
  */
 class JsHelperTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Js = null;
+
+/**
+ * @var mixed
+ */
+	public $View = null;
 
 /**
  * Regexp for CDATA start block
@@ -743,6 +752,15 @@ class JsHelperTest extends CakeTestCase {
  * @package       Cake.Test.Case.View.Helper
  */
 class JsBaseEngineTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $JsEngine = null;
+
+/**
+ * @var mixed
+ */
+	public $View = null;
 
 /**
  * setUp method

@@ -58,6 +58,15 @@ class TestCakeRequest extends CakeRequest {
  * CakeRequestTest
  */
 class CakeRequestTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	protected $_app = null;
+
+/**
+ * @var mixed
+ */
+	protected $_case = null;
 
 /**
  * Setup callback

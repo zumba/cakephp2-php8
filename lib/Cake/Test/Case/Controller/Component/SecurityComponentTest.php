@@ -140,6 +140,10 @@ class BrokenCallbackController extends Controller {
  * @package       Cake.Test.Case.Controller.Component
  */
 class SecurityComponentTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Security = null;
 
 /**
  * Controller property

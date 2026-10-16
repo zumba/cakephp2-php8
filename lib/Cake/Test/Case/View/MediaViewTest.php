@@ -26,6 +26,10 @@ App::uses('CakeResponse', 'Network');
  * @package       Cake.Test.Case.View
  */
 class MediaViewTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $MediaView = null;
 
 /**
  * setUp method

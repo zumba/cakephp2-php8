@@ -91,6 +91,21 @@ class CakeTestFixture {
 	public $canUseMemory = true;
 
 /**
+ * Import configuration (table or model to import the schema and/or records from).
+ * Defined by fixtures that import their definition instead of declaring $fields.
+ *
+ * @var array|null
+ */
+	public $import = null;
+
+/**
+ * Schema object used to create/drop the fixture table.
+ *
+ * @var CakeSchema
+ */
+	public $Schema = null;
+
+/**
  * Instantiate the fixture.
  *
  * @throws CakeException on invalid datasource usage.

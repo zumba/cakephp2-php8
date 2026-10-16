@@ -32,6 +32,15 @@ class HtmlAliasHelper extends HtmlHelper {
  * @package       Cake.Test.Case.View
  */
 class HelperCollectionTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Helpers = null;
+
+/**
+ * @var mixed
+ */
+	public $View = null;
 
 /**
  * setUp

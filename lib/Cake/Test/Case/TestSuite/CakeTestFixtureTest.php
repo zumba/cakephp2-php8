@@ -222,6 +222,20 @@ class FixturePrefixTest extends Model {
  * @package       Cake.Test.Case.TestSuite
  */
 class CakeTestFixtureTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $insertMulti = null;
+
+/**
+ * @var mixed
+ */
+	protected $_backupConfig = null;
+
+/**
+ * @var mixed
+ */
+	public $criticDb = null;
 
 /**
  * setUp method

@@ -52,11 +52,20 @@ class TransSessionIdController extends AppController {
 class ApplicationControllerTest extends ControllerTestCase {
 
 /**
+ * Session configuration restored after each test
+ *
+ * @var array
+ */
+	protected $_sessionConfig = array();
+
+/**
  * setupDown method
  *
  * @return void
  */
 	public function setUp() : void {
+		$this->_sessionConfig = Configure::read('Session');
+		$this->skipIf(PHP_VERSION_ID >= 80500, 'Enabling session.use_trans_sid is deprecated since PHP 8.5.');
 		CakeSession::destroy();
 		parent::setUp();
 	}
@@ -68,6 +77,9 @@ class ApplicationControllerTest extends ControllerTestCase {
  */
 	public function tearDown() : void {
 		CakeSession::destroy();
+		if (!empty($this->_sessionConfig)) {
+			Configure::write('Session', $this->_sessionConfig);
+		}
 		parent::tearDown();
 	}
 

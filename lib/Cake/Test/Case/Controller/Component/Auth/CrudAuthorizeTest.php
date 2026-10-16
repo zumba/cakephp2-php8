@@ -28,6 +28,20 @@ App::uses('CakeResponse', 'Network');
  * @package       Cake.Test.Case.Controller.Component.Auth
  */
 class CrudAuthorizeTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Acl = null;
+
+/**
+ * @var mixed
+ */
+	public $Components = null;
+
+/**
+ * @var mixed
+ */
+	public $auth = null;
 
 /**
  * setup

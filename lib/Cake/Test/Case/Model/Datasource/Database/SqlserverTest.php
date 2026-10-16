@@ -237,6 +237,15 @@ class SqlserverTestResultIterator extends ArrayIterator {
  * @package       Cake.Test.Case.Model.Datasource.Database
  */
 class SqlserverTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Dbo = null;
+
+/**
+ * @var mixed
+ */
+	public $model = null;
 
 /**
  * The Dbo instance to be tested

@@ -142,13 +142,13 @@ class CakeSessionTest extends CakeTestCase {
 			'checkAgent' => false,
 			'timeout' => 86400,
 			'ini' => array(
-				'session.referer_check' => 'example.com',
+				'session.cache_expire' => '123',
 				'session.use_trans_sid' => false
 			)
 		));
 		TestCakeSession::start();
 		$this->assertEquals('', ini_get('session.use_trans_sid'), 'Ini value is incorrect');
-		$this->assertEquals('example.com', ini_get('session.referer_check'), 'Ini value is incorrect');
+		$this->assertEquals('123', ini_get('session.cache_expire'), 'Ini value is incorrect');
 		$this->assertEquals('test', ini_get('session.name'), 'Ini value is incorrect');
 	}
 

@@ -28,6 +28,10 @@ App::uses('ApiShell', 'Console/Command');
  * @package       Cake.Test.Case.Console.Command
  */
 class ApiShellTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Shell = null;
 
 /**
  * setUp method

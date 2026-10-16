@@ -97,6 +97,41 @@ class Scaffold {
 	public $scaffoldTitle = null;
 
 /**
+ * Model instance being scaffolded.
+ *
+ * @var Model
+ */
+	public $ScaffoldModel = null;
+
+/**
+ * Name of the model class being scaffolded.
+ *
+ * @var string
+ */
+	public $modelClass = null;
+
+/**
+ * Key of the model being scaffolded.
+ *
+ * @var string
+ */
+	public $modelKey = null;
+
+/**
+ * URL to redirect to after a scaffold action completes.
+ *
+ * @var array|string
+ */
+	public $redirect = null;
+
+/**
+ * Actions that are scaffolded.
+ *
+ * @var array|bool|string
+ */
+	public $scaffoldActions = null;
+
+/**
  * Construct and set up given controller with given parameters.
  *
  * @param Controller $controller Controller to scaffold

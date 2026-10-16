@@ -24,6 +24,10 @@ App::uses('CakeSocket', 'Network');
  * @package       Cake.Test.Case.Network
  */
 class CakeSocketTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Socket = null;
 
 /**
  * setUp method
