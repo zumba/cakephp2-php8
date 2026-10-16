@@ -417,7 +417,9 @@ class MemcacheEngineTest extends CakeTestCase {
 		$memcache = new TestMemcacheEngine();
 		$memcache->settings['compress'] = false;
 
-		$mock = $this->getMock('Memcache');
+		// Only mock set(): generating stubs for every Memcache method reproduces the extension's
+		// implicitly nullable parameters, which PHP 8.4 reports as deprecated.
+		$mock = $this->getMock('Memcache', array('set'));
 		$memcache->setMemcache($mock);
 		$mock->expects($this->once())
 			->method('set')
