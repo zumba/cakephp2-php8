@@ -251,7 +251,7 @@ class Postgres extends DboSource {
 					'default' => preg_replace(
 						"/^'(.*)'$/",
 						"$1",
-						preg_replace('/::[\w\s]+/', '', $c->default)
+						preg_replace('/::[\w\s]+/', '', (string)$c->default)
 					),
 					'length' => $length,
 				);
