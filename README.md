@@ -27,7 +27,7 @@ Point `composer.json` at this repository and at the branch:
 ```
 {
 	"require": {
-		"cakephp/cakephp": "dev-cakephp2-php85 as 2.10.24"
+		"cakephp/cakephp": "dev-cakephp2-php85 as 2.11.0"
 	},
 	"repositories": [
 		{
@@ -112,6 +112,7 @@ It means that composer will look at `master` branch of repository configured und
 
 ### 2026-10-16 (Zumba, branch `cakephp2-php85`)
 
+- Version bumped to **2.11.0** (`lib/Cake/VERSION.txt`): new runtime requirement (`ext-intl`) and behaviour changes (exceptions instead of `E_USER_ERROR`, OpenSSL fallback) warrant a minor bump; upstream stays at 2.10.24, so the number also identifies this branch. Alias it as `dev-cakephp2-php85 as 2.11.0` in applications.
 - Synced all upstream fixes up to `kamilwylegala/cakephp2-php8` #87 (includes the CSRF fix #76 and the PHP 8.4/8.5 fixes #75, #83, #86).
 - CI matrix now runs PHP 8.0, 8.1, 8.4 and 8.5; the test `app/Config/core.php` reports `E_ALL` so any deprecation fails the suite.
 - PHP 8.5: `Security::cipher()` no longer casts the out-of-range `Security.cipherSeed` float to int (same seed value, no deprecation); `limit()`/`offset()` clamp out-of-range values instead of casting; `ConsoleLog` no longer calls `posix_isatty(null)`; `ReflectionProperty::setAccessible()` only on PHP < 8.1; null array offsets in `I18n`, `Helper`, `CakeResponse`, `ConsoleOptionParser`, `RequestHandlerComponent`, `Set`, `Configure`, `CakeSession` replaced by explicit checks; `libxml_disable_entity_loader()` calls removed.
