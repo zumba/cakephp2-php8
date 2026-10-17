@@ -65,7 +65,7 @@ class ApplicationControllerTest extends ControllerTestCase {
  */
 	public function setUp() : void {
 		$this->_sessionConfig = Configure::read('Session');
-		$this->skipIf(PHP_VERSION_ID >= 80500, 'Enabling session.use_trans_sid is deprecated since PHP 8.5.');
+		$this->skipIf(PHP_VERSION_ID >= 80400, 'Enabling session.use_trans_sid is deprecated since PHP 8.4.');
 		CakeSession::destroy();
 		parent::setUp();
 	}
