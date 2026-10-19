@@ -44,6 +44,33 @@ for i, (kind, cls, name, message, location, text) in enumerate(problems):
     summary.append(text[:1500])
     summary.append('```')
 
+# Also publish PHPUnit's own console summary (errors and failures, without the warnings
+# section), so the reason is visible even when the JUnit log has nothing to say.
+output_path = sys.argv[2] if len(sys.argv) > 2 else None
+if output_path and os.path.exists(output_path):
+    lines = open(output_path, errors='replace').read().splitlines()
+    starts = [i for i, line in enumerate(lines) if line.startswith('There w')]
+    if starts:
+        kept = []
+        skipping = False
+        for line in lines[starts[0]:]:
+            if line.startswith('There w'):
+                skipping = 'warning' in line or 'risky' in line
+            if not skipping:
+                kept.append(line)
+        tail = kept
+    else:
+        tail = lines[-40:]
+    text = '\n'.join(tail).strip()
+    chunk = 900
+    pieces = [text[i:i + chunk] for i in range(0, len(text), chunk)][:8]
+    for n, piece in enumerate(pieces, 1):
+        print('::error title=PHPUnit output %d/%d::%s' % (n, len(pieces), piece.replace('\n', '%0A')))
+    summary.append('## PHPUnit console summary')
+    summary.append('```')
+    summary.append(text[:6000])
+    summary.append('```')
+
 step_summary = os.environ.get('GITHUB_STEP_SUMMARY')
 if step_summary:
     with open(step_summary, 'a') as fh:

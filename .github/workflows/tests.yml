@@ -126,8 +126,11 @@ jobs:
 
       - name: Run Tests
         id: tests
-        run: ./vendors/bin/phpunit --stderr --verbose --log-junit junit.xml lib/Cake/Test/Case/AllTestsTest.php
+        shell: bash
+        run: |
+          set -o pipefail
+          ./vendors/bin/phpunit --stderr --verbose --log-junit junit.xml lib/Cake/Test/Case/AllTestsTest.php 2>&1 | tee phpunit-output.txt
 
       - name: Annotate failures
         if: failure() && steps.tests.conclusion == 'failure'
-        run: python3 .github/workflows/annotate-junit.py junit.xml
+        run: python3 .github/workflows/annotate-junit.py junit.xml phpunit-output.txt
