@@ -21,8 +21,8 @@ for case in root.iter('testcase'):
         node = case.find(kind)
         if node is None:
             continue
-        if 'Risky' in (node.get('type') or '') or 'Warning' in (node.get('type') or ''):
-            continue  # risky tests and PHPUnit warnings do not fail the build
+        if (node.get('type') or '').endswith('RiskyTestError'):
+            continue  # risky tests do not fail the build
         text = (node.text or '').strip()
         lines = [line for line in text.splitlines() if line.strip()]
         # PHPUnit writes "Class::test" on the first line, then the message
