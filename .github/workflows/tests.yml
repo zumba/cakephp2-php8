@@ -127,4 +127,9 @@ jobs:
         run: cp ./.github/workflows/configs/database.php ./app/Config/
 
       - name: Run Tests
-        run: ./vendors/bin/phpunit --stderr --verbose lib/Cake/Test/Case/AllTestsTest.php
+        id: tests
+        run: ./vendors/bin/phpunit --stderr --verbose --log-junit junit.xml lib/Cake/Test/Case/AllTestsTest.php
+
+      - name: Annotate failures
+        if: failure() && steps.tests.conclusion == 'failure'
+        run: python3 .github/workflows/annotate-junit.py junit.xml
