@@ -10,7 +10,7 @@ This repository (`zumba/cakephp2-php8`) is Zumba's fork of [kamilwylegala/cakeph
 The `cakephp2-php85` branch is the version our applications use on PHP 8.5 containers. It contains:
 
 - Every upstream fix up to and including the CSRF hardening (upstream #76), the PHP 8.4 fixes (#75, #83) and the PHP 8.5 fixes (#86).
-- A CI matrix that runs the framework test suite on PHP 8.0, 8.1, 8.4 and 8.5. The test bootstrap converts every deprecation into a failure, so a green build means no deprecation notices on those versions.
+- A CI matrix that runs the framework test suite on PHP 8.0, 8.1 and 8.5. The test bootstrap converts every deprecation into a failure, so a green build means no deprecation notices on those versions.
 - A local `docker/web` image based on `php:8.5-apache`.
 
 The code stays compatible with PHP 8.0+; no PHP 8.5-only syntax is used.
@@ -114,7 +114,7 @@ It means that composer will look at `master` branch of repository configured und
 
 - Version bumped to **2.11.0** (`lib/Cake/VERSION.txt`): new runtime requirement (`ext-intl`) and behaviour changes (exceptions instead of `E_USER_ERROR`, OpenSSL fallback) warrant a minor bump; upstream stays at 2.10.24, so the number also identifies this branch. Alias it as `dev-cakephp2-php85 as 2.11.0` in applications.
 - Synced all upstream fixes up to `kamilwylegala/cakephp2-php8` #87 (includes the CSRF fix #76 and the PHP 8.4/8.5 fixes #75, #83, #86).
-- CI matrix now runs PHP 8.0, 8.1, 8.4 and 8.5; the test `app/Config/core.php` reports `E_ALL` so any deprecation fails the suite.
+- CI matrix now runs PHP 8.0, 8.1 and 8.5; the test `app/Config/core.php` reports `E_ALL` so any deprecation fails the suite.
 - PHP 8.5: `Security::cipher()` no longer casts the out-of-range `Security.cipherSeed` float to int (same seed value, no deprecation); `limit()`/`offset()` clamp out-of-range values instead of casting; `ConsoleLog` no longer calls `posix_isatty(null)`; `ReflectionProperty::setAccessible()` only on PHP < 8.1; null array offsets in `I18n`, `Helper`, `CakeResponse`, `ConsoleOptionParser`, `RequestHandlerComponent`, `Set`, `Configure`, `CakeSession` replaced by explicit checks; `libxml_disable_entity_loader()` calls removed.
 - PHP 8.4: `trigger_error(..., E_USER_ERROR)` replaced by exceptions (`ConfigureException`, `CakeException`, `RuntimeException` in the webroot/console bootstrap scripts) or `ErrorHandler::handleFatalError()`.
 - PHP 8.2: undeclared (dynamic) properties declared on `Scaffold`, `ConsoleOptionParser`, `HelpFormatter`, `MemcachedEngine`, `CakeTestCase`, `CakeTestFixture`, `CakeFixtureManager`, `ControllerTestDispatcher` and ~100 test classes; `ConnectionManager::create()` stores runtime connections on a `#[\AllowDynamicProperties]` subclass of `DATABASE_CONFIG`; `CakeRequest` allows dynamic properties.

@@ -29,8 +29,6 @@ jobs:
             db-type: sqlite
           - php-version: '8.1'
             db-type: mysql
-          - php-version: '8.4'
-            db-type: mysql
           - php-version: '8.5'
             db-type: mysql
           - php-version: '8.5'
