@@ -10,13 +10,13 @@ import sys
 import xml.etree.ElementTree as ET
 
 path = sys.argv[1] if len(sys.argv) > 1 else 'junit.xml'
-if not os.path.exists(path):
-    print('::error::PHPUnit did not write %s (the run probably aborted before the summary)' % path)
-    sys.exit(0)
-
-root = ET.parse(path).getroot()
 problems = []
-for case in root.iter('testcase'):
+cases = []
+if not os.path.exists(path) or os.path.getsize(path) == 0:
+    print('::error::PHPUnit did not write %s (the run probably aborted before the summary)' % path)
+else:
+    cases = list(ET.parse(path).getroot().iter('testcase'))
+for case in cases:
     for kind in ('error', 'failure'):
         node = case.find(kind)
         if node is None:
