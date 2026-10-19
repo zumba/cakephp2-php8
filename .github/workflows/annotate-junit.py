@@ -21,9 +21,13 @@ for case in root.iter('testcase'):
         node = case.find(kind)
         if node is None:
             continue
+        if 'Risky' in (node.get('type') or '') or 'Warning' in (node.get('type') or ''):
+            continue  # risky tests and PHPUnit warnings do not fail the build
         text = (node.text or '').strip()
-        message = text.splitlines()[0] if text else node.get('message', kind)
-        location = next((line for line in text.splitlines() if line.startswith('/')), '')
+        lines = [line for line in text.splitlines() if line.strip()]
+        # PHPUnit writes "Class::test" on the first line, then the message
+        message = node.get('message') or (lines[1] if len(lines) > 1 else (lines[0] if lines else kind))
+        location = next((line for line in lines if line.startswith('/')), '')
         problems.append((kind, case.get('class') or '', case.get('name') or '', message, location, text))
 
 summary = ['## PHPUnit: %d problem(s)' % len(problems), '']
