@@ -97,6 +97,20 @@ class TestTheme2View extends ThemeView {
  * @package       Cake.Test.Case.View
  */
 class ThemeViewTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Controller = null;
+
+/**
+ * @var mixed
+ */
+	public $PostsController = null;
+
+/**
+ * @var mixed
+ */
+	public $ThemeView = null;
 
 /**
  * setUp method

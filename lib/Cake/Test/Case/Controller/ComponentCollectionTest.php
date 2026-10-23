@@ -28,6 +28,10 @@ class CookieAliasComponent extends CookieComponent {
 }
 
 class ComponentCollectionTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Components = null;
 
 /**
  * setUp

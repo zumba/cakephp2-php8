@@ -23,6 +23,15 @@ App::uses('CakeEvent', 'Event');
  * A generic object class
  */
 class GenericObject {
+/**
+ * @var mixed
+ */
+	protected $_Collection = null;
+
+/**
+ * @var mixed
+ */
+	public $settings = null;
 
 /**
  * Constructor
@@ -128,6 +137,25 @@ class GenericObjectCollection extends ObjectCollection {
 }
 
 class ObjectCollectionTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $FirstGenericObject = null;
+
+/**
+ * @var mixed
+ */
+	public $Objects = null;
+
+/**
+ * @var mixed
+ */
+	public $SecondGenericObject = null;
+
+/**
+ * @var mixed
+ */
+	public $ThirdGenericObject = null;
 
 /**
  * setUp

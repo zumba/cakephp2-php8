@@ -28,6 +28,15 @@ App::uses('CakePlugin', 'Core');
  * @package		Cake.Test.Case.View.Helper
  */
 class FlashHelperTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Flash = null;
+
+/**
+ * @var mixed
+ */
+	public $View = null;
 
 /**
  * setupBeforeClass method

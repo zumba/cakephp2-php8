@@ -29,6 +29,30 @@ require_once dirname(dirname(dirname(__FILE__))) . DS . 'models.php';
  * @package       Cake.Test.Case.Model.Datasource.Database
  */
 class MysqlTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Featured2 = null;
+
+/**
+ * @var mixed
+ */
+	public $Model = null;
+
+/**
+ * @var mixed
+ */
+	protected $_debug = null;
+
+/**
+ * @var mixed
+ */
+	public $model = null;
+
+/**
+ * @var mixed
+ */
+	public $startTime = null;
 
 /**
  * autoFixtures property
@@ -62,11 +86,11 @@ class MysqlTest extends CakeTestCase {
  */
 	public function setUp() : void {
 		parent::setUp();
+		$this->_debug = Configure::read('debug');
 		$this->Dbo = ConnectionManager::getDataSource('test');
 		if (!($this->Dbo instanceof Mysql)) {
 			$this->markTestSkipped('The MySQL extension is not available.');
 		}
-		$this->_debug = Configure::read('debug');
 		Configure::write('debug', 1);
 		$this->model = ClassRegistry::init('MysqlTestModel');
 	}

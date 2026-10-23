@@ -24,6 +24,33 @@ App::uses('MemcacheEngine', 'Cache/Engine');
  *
  * @package       Cake.Test.Case.Cache.Engine
  */
+/**
+ * Records the arguments passed to set() instead of talking to a memcache server.
+ *
+ * A PHPUnit mock of the Memcache class cannot be used here: the generated mock repeats the
+ * extension's implicitly nullable parameters, which PHP 8.4+ reports as deprecated.
+ */
+class RecordingMemcache {
+
+/**
+ * Arguments of every set() call
+ *
+ * @var array
+ */
+	public $calls = array();
+
+/**
+ * Record a set() call.
+ *
+ * @return bool
+ */
+	public function set() {
+		$this->calls[] = func_get_args();
+		return true;
+	}
+
+}
+
 class TestMemcacheEngine extends MemcacheEngine {
 
 /**
@@ -48,6 +75,10 @@ class TestMemcacheEngine extends MemcacheEngine {
  * @package       Cake.Test.Case.Cache.Engine
  */
 class MemcacheEngineTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	protected $_cacheDisable = null;
 
 /**
  * setUp method
@@ -413,14 +444,13 @@ class MemcacheEngineTest extends CakeTestCase {
 		$memcache = new TestMemcacheEngine();
 		$memcache->settings['compress'] = false;
 
-		$mock = $this->getMock('Memcache');
-		$memcache->setMemcache($mock);
-		$mock->expects($this->once())
-			->method('set')
-			->with('key', 'value', false, 0);
+		$recorder = new RecordingMemcache();
+		$memcache->setMemcache($recorder);
 
 		$value = 'value';
 		$memcache->write('key', $value, 50 * DAY);
+
+		$this->assertEquals(array(array('key', 'value', false, 0)), $recorder->calls);
 	}
 
 /**

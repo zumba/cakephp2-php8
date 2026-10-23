@@ -78,6 +78,10 @@ class XmlUser extends CakeTestModel {
  * @package       Cake.Test.Case.Utility
  */
 class XmlTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	protected $_appEncoding = null;
 
 /**
  * autoFixtures property
@@ -198,6 +202,17 @@ class XmlTest extends CakeTestCase {
 	public function testBuildFromUrlWhenDisabled() {
 		$this->expectException(XmlException::class);
 		$xml = 'http://www.google.com';
+		Xml::build($xml, array('readFile' => false));
+	}
+
+/**
+ * Test that the readFile option disables https url parsing too.
+ *
+ * @return void
+ */
+	public function testBuildFromHttpsUrlWhenDisabled() {
+		$this->expectException(XmlException::class);
+		$xml = 'https://www.google.com';
 		Xml::build($xml, array('readFile' => false));
 	}
 

@@ -112,6 +112,10 @@ class ControllerTestCaseTestController extends AppController {
  * @package       Cake.Test.Case.TestSuite
  */
 class ControllerTestCaseTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Case = null;
 
 /**
  * fixtures property

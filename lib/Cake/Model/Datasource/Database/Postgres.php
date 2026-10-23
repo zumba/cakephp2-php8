@@ -251,7 +251,7 @@ class Postgres extends DboSource {
 					'default' => preg_replace(
 						"/^'(.*)'$/",
 						"$1",
-						preg_replace('/::[\w\s]+/', '', $c->default)
+						preg_replace('/::[\w\s]+/', '', (string)$c->default)
 					),
 					'length' => $length,
 				);
@@ -681,9 +681,9 @@ class Postgres extends DboSource {
  */
 	public function limit($limit, $offset = null) {
 		if ($limit) {
-			$rt = sprintf(' LIMIT %u', $limit);
+			$rt = sprintf(' LIMIT %u', $this->_limitValue($limit));
 			if ($offset) {
-				$rt .= sprintf(' OFFSET %u', $offset);
+				$rt .= sprintf(' OFFSET %u', $this->_limitValue($offset));
 			}
 			return $rt;
 		}

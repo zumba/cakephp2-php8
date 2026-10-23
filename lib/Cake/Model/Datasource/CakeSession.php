@@ -23,6 +23,8 @@
 
 App::uses('Hash', 'Utility');
 App::uses('Security', 'Utility');
+App::uses('SessionHandlerAdapter', 'Model/Datasource');
+
 
 /**
  * Session class for CakePHP.
@@ -200,8 +202,8 @@ class CakeSession {
  */
 	protected static function _setHost($host) {
 		static::$host = $host;
-		if (strpos(static::$host, ':') !== false) {
-			static::$host = substr(static::$host, 0, strpos(static::$host, ':'));
+		if (is_string($host) && strpos($host, ':') !== false) {
+			static::$host = substr($host, 0, strpos($host, ':'));
 		}
 	}
 
@@ -246,6 +248,9 @@ class CakeSession {
  */
 	public static function check($name) {
 		if (!static::_hasSession() || !static::start()) {
+			return false;
+		}
+		if ($name === null) {
 			return false;
 		}
 		if (isset($_SESSION[$name])) {
@@ -591,12 +596,7 @@ class CakeSession {
 			$handler = static::_getHandler($sessionConfig['handler']['engine']);
 			if (!function_exists('session_status') || session_status() !== PHP_SESSION_ACTIVE) {
 				session_set_save_handler(
-					array($handler, 'open'),
-					array($handler, 'close'),
-					array($handler, 'read'),
-					array($handler, 'write'),
-					array($handler, 'destroy'),
-					array($handler, 'gc')
+					new SessionHandlerAdapter($handler)
 				);
 			}
 		}

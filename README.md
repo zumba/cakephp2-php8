@@ -4,11 +4,56 @@
 
 Unfortunately branch 2.x in original repository was taken down.
 
-## Incoming breaking changes
+## Zumba fork: PHP 8.5 branch (`cakephp2-php85`)
 
-The `strftime` function is widely used in the framework codebase. We plan to replace it with `IntlDateFormatter::format()`, this method comes from the `Intl` extension. CakePHP2 doesn't use it, so it would be a **breaking change**. We'd like to start rolling it out in early **May 2024**.
+This repository (`zumba/cakephp2-php8`) is Zumba's fork of [kamilwylegala/cakephp2-php8](https://github.com/kamilwylegala/cakephp2-php8).
+The `cakephp2-php85` branch is the version our applications use on PHP 8.5 containers. It contains:
 
-If you have any concerns, let's discuss it under: https://github.com/kamilwylegala/cakephp2-php8/issues/65
+- Every upstream fix up to and including the CSRF hardening (upstream #76), the PHP 8.4 fixes (#75, #83) and the PHP 8.5 fixes (#86).
+- A CI matrix that runs the framework test suite on PHP 8.0, 8.1 and 8.5. The test bootstrap converts every deprecation into a failure, so a green build means no deprecation notices on those versions.
+- A local `docker/web` image based on `php:8.5-apache`.
+
+The code stays compatible with PHP 8.0+; no PHP 8.5-only syntax is used.
+
+### Requirements on PHP 8.5
+
+- `ext-intl` must be installed in the container. `strftime()` was replaced by `IntlDateFormatter` (via `php81_bc/strftime`), which requires it.
+- `ext-mcrypt` is no longer needed; `Security::encrypt()`/`decrypt()` use OpenSSL.
+
+### Using the branch in an application
+
+Point `composer.json` at this repository and at the branch:
+
+```
+{
+	"require": {
+		"cakephp/cakephp": "dev-cakephp2-php85 as 2.11.0"
+	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/zumba/cakephp2-php8"
+		}
+	]
+}
+```
+
+### Update procedure
+
+Updating an application to the latest state of the branch is a standard composer update:
+
+```
+composer update cakephp/cakephp
+```
+
+Then run the application's own test suite under PHP 8.5. Commit the resulting `composer.lock`.
+
+### Syncing new upstream fixes into the branch
+
+1. `git fetch upstream` (where `upstream` is `https://github.com/kamilwylegala/cakephp2-php8.git`).
+2. Bring the new upstream commits onto a feature branch cut from `cakephp2-php85` (merge or cherry-pick).
+3. Run the test suite on PHP 8.5 (locally via `docker compose up` or by pushing and letting CI run the matrix).
+4. Open a PR into `cakephp2-php85`.
 
 ## Why I created this fork? 🤔
 
@@ -38,6 +83,10 @@ Here are steps I took to migrate my project through all versions to PHP 8.1, may
 - ~~Due to lack of tests ☝️~~ - **you also need to rely** on tests in your application after integrating with this fork.
 - If after integration you spot any issues related to framework please let me know by creating an issue or pull request with fix.
 
+### Breaking changes
+
+- In order to get rid of `strftime()` deprecation notices, it's required to switch to `IntlDateFormatter` class. This class is available in `intl` extension. Fork doesn't require it explicitly but to be able to use its functions Symfony ICU Polyfill is installed. To provide `strftime` behavior compatibility, `PHP81_BC\strftime` is used. `PHP81_BC` doesn't fully cover strftime, your code should work but there is a chance you'll get slightly different results. Discussed (here)[https://github.com/kamilwylegala/cakephp2-php8/pull/64] and (here)[https://github.com/kamilwylegala/cakephp2-php8/issues/65].
+
 ## Installation
 
 This repository **is not** available in packagist, therefore your project's `composer.json` must be changed to point to custom repository.
@@ -60,6 +109,49 @@ Example configuration:
 It means that composer will look at `master` branch of repository configured under `repositories` to resolve update of `cakephp/cakephp` package.
 
 ## Changelog
+
+### 2026-10-16 (Zumba, branch `cakephp2-php85`)
+
+- Version bumped to **2.11.0** (`lib/Cake/VERSION.txt`): new runtime requirement (`ext-intl`) and behaviour changes (exceptions instead of `E_USER_ERROR`, OpenSSL fallback) warrant a minor bump; upstream stays at 2.10.24, so the number also identifies this branch. Alias it as `dev-cakephp2-php85 as 2.11.0` in applications.
+- Synced all upstream fixes up to `kamilwylegala/cakephp2-php8` #87 (includes the CSRF fix #76 and the PHP 8.4/8.5 fixes #75, #83, #86).
+- CI matrix now runs PHP 8.0, 8.1 and 8.5; the test `app/Config/core.php` reports `E_ALL` so any deprecation fails the suite.
+- PHP 8.5: `Security::cipher()` no longer casts the out-of-range `Security.cipherSeed` float to int (same seed value, no deprecation); `limit()`/`offset()` clamp out-of-range values instead of casting; `ConsoleLog` no longer calls `posix_isatty(null)`; `ReflectionProperty::setAccessible()` only on PHP < 8.1; null array offsets in `I18n`, `Helper`, `CakeResponse`, `ConsoleOptionParser`, `RequestHandlerComponent`, `Set`, `Configure`, `CakeSession` replaced by explicit checks; `libxml_disable_entity_loader()` calls removed.
+- PHP 8.4: `trigger_error(..., E_USER_ERROR)` replaced by exceptions (`ConfigureException`, `CakeException`, `RuntimeException` in the webroot/console bootstrap scripts) or `ErrorHandler::handleFatalError()`.
+- PHP 8.2: undeclared (dynamic) properties declared on `Scaffold`, `ConsoleOptionParser`, `HelpFormatter`, `MemcachedEngine`, `CakeTestCase`, `CakeTestFixture`, `CakeFixtureManager`, `ControllerTestDispatcher` and ~100 test classes; `ConnectionManager::create()` stores runtime connections on a `#[\AllowDynamicProperties]` subclass of `DATABASE_CONFIG`; `CakeRequest` allows dynamic properties.
+- PHP 8.1: remaining "passing null to non-nullable internal parameter" cases fixed across the framework (strlen/strpos/strtolower/preg_*/trim/substr/… with `(string)` casts or null checks).
+- `Security::encrypt()`/`decrypt()` fall back to OpenSSL when ext-mcrypt is missing.
+- `SessionHandlerAdapter` methods marked `#[\ReturnTypeWillChange]`.
+- Local `docker/web` image moved to `php:8.5-apache` (with `intl`, without `mcrypt`).
+
+### 2025-02-04
+
+- Fixes for PHP 8.4: `session_set_save_handler` accepts object, removed `E_STRICT` reference.
+- Removed github action with php code sniffer. It's quite painful to work with. Need to migrate to something newer, that will affect code base as little as possible.
+
+### 2024-11-16
+
+- Inflector fix: str_place with null.
+
+### 2024-09-21
+
+- Added wrapper for PDOException to avoid creating dynamic property `queryString`.
+
+### 2024-07-24
+
+- Csrf vulnerabity fix back ported from Cake PHP 3
+- Explicit type hint definition of nullable parameters.
+
+### 2024-06-05
+
+- Removed usage of `strftime`, replaced with Intl extension.
+
+### 2024-05-24
+
+- Fix deprecation error in Model: `Automatic conversion of false to array is deprecated`
+
+### 2024-05-22
+
+- Fix deprecation error in I18n: `Automatic conversion of false to array is deprecated`
 
 ### 2024-02-02
 

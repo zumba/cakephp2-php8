@@ -31,6 +31,10 @@ App::uses('DbConfigTask', 'Console/Command/Task');
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class FixtureTaskTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Task = null;
 
 /**
  * fixtures

@@ -26,6 +26,15 @@ class_exists('AclComponent');
  * @package       Cake.Test.Case.Controller.Component.Acl
  */
 class PhpAclTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Acl = null;
+
+/**
+ * @var mixed
+ */
+	public $PhpAcl = null;
 
 /**
  * Setup

@@ -176,6 +176,10 @@ class PostgresClientTestModel extends Model {
  * @package       Cake.Test.Case.Model.Datasource.Database
  */
 class PostgresTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $model = null;
 
 /**
  * Do not automatically load fixtures for each test, they will be loaded manually

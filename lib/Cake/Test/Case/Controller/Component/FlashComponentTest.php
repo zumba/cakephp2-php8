@@ -27,6 +27,15 @@ App::uses('ComponentCollection', 'Controller');
  * @package		Cake.Test.Case.Controller.Component
  */
 class FlashComponentTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Components = null;
+
+/**
+ * @var mixed
+ */
+	public $Flash = null;
 
 /**
  * setUp method

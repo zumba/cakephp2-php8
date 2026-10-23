@@ -175,6 +175,10 @@ class DbAclTwoTest extends DbAcl {
  * @package       Cake.Test.Case.Controller.Component.Acl
  */
 class DbAclTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Acl = null;
 
 /**
  * fixtures property

@@ -135,7 +135,7 @@ class ErrorHandler {
 			);
 
 			static::$_bailExceptionRendering = true;
-			trigger_error($message, E_USER_ERROR);
+			static::handleFatalError(E_USER_ERROR, $message, $e->getFile(), $e->getLine());
 		}
 	}
 
@@ -300,10 +300,6 @@ class ErrorHandler {
 			case E_NOTICE:
 			case E_USER_NOTICE:
 				$error = 'Notice';
-				$log = LOG_NOTICE;
-				break;
-			case E_STRICT:
-				$error = 'Strict';
 				$log = LOG_NOTICE;
 				break;
 			case E_DEPRECATED:

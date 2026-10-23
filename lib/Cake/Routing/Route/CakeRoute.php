@@ -275,7 +275,7 @@ class CakeRoute {
 
 		$namedConfig = Router::namedConfig();
 		$greedy = $namedConfig['greedyNamed'];
-		$rules = $namedConfig['rules'];
+		$rules = is_array($namedConfig['rules']) ? $namedConfig['rules'] : array();
 		if (!empty($this->options['named'])) {
 			$greedy = isset($this->options['greedyNamed']) && $this->options['greedyNamed'] === true;
 			foreach ((array)$this->options['named'] as $key => $val) {
@@ -510,7 +510,7 @@ class CakeRoute {
 				if (is_array($value)) {
 					$flat = Hash::flatten($value, '%5D%5B');
 					foreach ($flat as $namedKey => $namedValue) {
-						$named[] = $key . "%5B{$namedKey}%5D" . $separator . rawurlencode($namedValue);
+						$named[] = $key . "%5B{$namedKey}%5D" . $separator . rawurlencode((string)$namedValue);
 					}
 				} else {
 					$named[] = $key . $separator . rawurlencode($value);

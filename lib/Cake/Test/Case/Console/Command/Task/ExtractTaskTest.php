@@ -31,6 +31,25 @@ App::uses('ExtractTask', 'Console/Command/Task');
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class ExtractTaskTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Task = null;
+
+/**
+ * @var mixed
+ */
+	public $in = null;
+
+/**
+ * @var mixed
+ */
+	public $out = null;
+
+/**
+ * @var mixed
+ */
+	public $path = null;
 
 /**
  * setUp method

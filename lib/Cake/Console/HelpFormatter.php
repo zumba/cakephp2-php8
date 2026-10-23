@@ -38,6 +38,13 @@ class HelpFormatter {
 	protected $_maxArgs = 6;
 
 /**
+ * Option parser being formatted.
+ *
+ * @var ConsoleOptionParser
+ */
+	protected $_parser = null;
+
+/**
  * The maximum number of options shown when generating usage.
  *
  * @var int

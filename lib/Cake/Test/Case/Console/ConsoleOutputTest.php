@@ -24,6 +24,10 @@ App::uses('ConsoleOutput', 'Console');
  * @package       Cake.Test.Case.Console
  */
 class ConsoleOutputTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $output = null;
 
 /**
  * setup

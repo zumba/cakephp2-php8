@@ -22,6 +22,10 @@ App::uses('CommandTask', 'Console/Command/Task');
  * @package   Cake.Test.Case.Console.Command.Task
  */
 class CommandTaskTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $CommandTask = null;
 
 /**
  * setUp method

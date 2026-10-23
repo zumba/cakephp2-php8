@@ -109,7 +109,7 @@ class Security {
 		if (empty($type)) {
 			$type = static::$hashType;
 		}
-		$type = strtolower($type);
+		$type = strtolower((string)$type);
 
 		if ($type === 'blowfish') {
 			return static::_crypt($string, $salt);
@@ -128,14 +128,7 @@ class Security {
 			$type = 'sha256';
 		}
 
-		if ($type === 'sha256' && function_exists('mhash')) {
-			return bin2hex(mhash(MHASH_SHA256, $string));
-		}
-
-		if (function_exists('hash')) {
-			return hash($type, $string);
-		}
-		return md5($string);
+		return hash($type, $string);
 	}
 
 /**
@@ -203,6 +196,36 @@ class Security {
 	}
 
 /**
+ * Converts the configured cipher seed into an integer.
+ *
+ * `Security.cipherSeed` is traditionally a numeric string that is larger than PHP_INT_MAX.
+ * Before PHP 8.5 `(int)(float)$seed` silently wrapped the value around modulo 2^64; PHP 8.5
+ * deprecates that cast. This reproduces the same wrap-around so that existing seeds keep
+ * producing the same cipher output.
+ *
+ * @param mixed $seed The configured seed.
+ * @return int Seed usable with srand().
+ */
+	protected static function _cipherSeed($seed) {
+		$seed = (float)$seed;
+		if (!is_finite($seed)) {
+			return 0;
+		}
+		if ($seed >= (float)PHP_INT_MIN && $seed < (float)PHP_INT_MAX) {
+			return (int)$seed;
+		}
+		$twoPow64 = 18446744073709551616.0;
+		$seed = fmod($seed, $twoPow64);
+		if ($seed < 0) {
+			$seed += $twoPow64;
+		}
+		if ($seed >= 9223372036854775808.0) {
+			$seed -= $twoPow64;
+		}
+		return (int)$seed;
+	}
+
+/**
  * Runs $text through a XOR cipher.
  *
  * *Note* This is not a cryptographically strong method and should not be used
@@ -223,8 +246,9 @@ class Security {
 			return '';
 		}
 
-		srand((int)(float)Configure::read('Security.cipherSeed'));
+		srand(static::_cipherSeed(Configure::read('Security.cipherSeed')));
 		$out = '';
+		$text = (string)$text;
 		$keyLength = strlen($key);
 		for ($i = 0, $textLength = strlen($text); $i < $textLength; $i++) {
 			$j = ord(substr($key, $i % $keyLength, 1));
@@ -352,7 +376,7 @@ class Security {
 		// Generate the encryption and hmac key.
 		$key = substr(hash('sha256', $key . $hmacSalt), 0, 32);
 
-		if (Configure::read('Security.useOpenSsl')) {
+		if (Configure::read('Security.useOpenSsl') || !function_exists('mcrypt_encrypt')) {
 			$method = 'AES-256-CBC';
 			$ivSize = openssl_cipher_iv_length($method);
 			$iv = openssl_random_pseudo_bytes($ivSize);
@@ -419,7 +443,7 @@ class Security {
 			return false;
 		}
 
-		if (Configure::read('Security.useOpenSsl')) {
+		if (Configure::read('Security.useOpenSsl') || !function_exists('mcrypt_decrypt')) {
 			$method = 'AES-256-CBC';
 			$ivSize = openssl_cipher_iv_length($method);
 			$iv = substr($cipher, 0, $ivSize);

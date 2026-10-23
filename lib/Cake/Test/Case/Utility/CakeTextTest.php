@@ -25,6 +25,10 @@ App::uses('CakeText', 'Utility');
  * @coversDefaultClass CakeText
  */
 class CakeTextTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Text = null;
 
 /**
  * Setup object under test

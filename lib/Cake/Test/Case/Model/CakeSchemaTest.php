@@ -434,6 +434,10 @@ class SchemaPrefixAuthUser extends CakeTestModel {
  * @package       Cake.Test.Case.Model
  */
 class CakeSchemaTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Schema = null;
 
 /**
  * fixtures property

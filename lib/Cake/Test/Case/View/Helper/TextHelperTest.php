@@ -50,6 +50,15 @@ class CakeTextMock {
  * @package       Cake.Test.Case.View.Helper
  */
 class TextHelperTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Text = null;
+
+/**
+ * @var mixed
+ */
+	public $View = null;
 
 /**
  * setUp method

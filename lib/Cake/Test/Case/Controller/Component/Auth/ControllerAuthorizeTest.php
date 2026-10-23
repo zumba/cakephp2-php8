@@ -27,6 +27,20 @@ App::uses('CakeResponse', 'Network');
  * @package       Cake.Test.Case.Controller.Component.Auth
  */
 class ControllerAuthorizeTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $auth = null;
+
+/**
+ * @var mixed
+ */
+	public $components = null;
+
+/**
+ * @var mixed
+ */
+	public $controller = null;
 
 /**
  * setup

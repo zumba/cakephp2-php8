@@ -83,6 +83,10 @@ class TestHttpResponse extends HttpResponse {
  * @package       Cake.Test.Case.Network.Http
  */
 class HttpResponseTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $HttpResponse = null;
 
 /**
  * This function sets up a HttpResponse

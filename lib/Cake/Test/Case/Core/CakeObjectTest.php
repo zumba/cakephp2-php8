@@ -280,6 +280,10 @@ class ObjectTestModel extends CakeTestModel {
  * @package       Cake.Test.Case.Core
  */
 class ObjectTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $object = null;
 
 /**
  * fixtures

@@ -27,6 +27,15 @@ App::uses('File', 'Utility');
  * @package       Cake.Test.Case.View.Helper
  */
 class RssHelperTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Rss = null;
+
+/**
+ * @var mixed
+ */
+	public $View = null;
 
 /**
  * setUp method

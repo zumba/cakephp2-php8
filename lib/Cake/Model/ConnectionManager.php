@@ -66,9 +66,30 @@ class ConnectionManager {
 	protected static function _init() {
 		include_once CONFIG . 'database.php';
 		if (class_exists('DATABASE_CONFIG')) {
-			static::$config = new DATABASE_CONFIG();
+			static::$config = static::_createConfig();
 		}
 		static::$_init = true;
+	}
+
+/**
+ * Instantiates the application's DATABASE_CONFIG class.
+ *
+ * ConnectionManager::create() stores runtime connections as properties of that object.
+ * Since PHP 8.2 creating such dynamic properties is deprecated unless the class allows them,
+ * so the object is created through CakeDatabaseConfig, a subclass that declares
+ * `#[\AllowDynamicProperties]`. The application class is used as-is when it cannot be extended.
+ *
+ * @return DATABASE_CONFIG
+ */
+	protected static function _createConfig() {
+		$reflection = new ReflectionClass('DATABASE_CONFIG');
+		if ($reflection->isFinal() || $reflection->getAttributes('AllowDynamicProperties')) {
+			return new DATABASE_CONFIG();
+		}
+		if (!class_exists('CakeDatabaseConfig', false)) {
+			require CAKE . 'Model' . DS . 'CakeDatabaseConfig.php';
+		}
+		return new CakeDatabaseConfig();
 	}
 
 /**
@@ -177,7 +198,7 @@ class ConnectionManager {
 		if (!class_exists($conn['classname'])) {
 			throw new MissingDatasourceException(array(
 				'class' => $conn['classname'],
-				'plugin' => substr($plugin, 0, -1)
+				'plugin' => substr((string)$plugin, 0, -1)
 			));
 		}
 		return true;

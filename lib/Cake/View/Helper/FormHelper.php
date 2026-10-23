@@ -213,8 +213,9 @@ class FormHelper extends AppHelper {
 		if ($key === 'fields') {
 			if (!isset($this->fieldset[$model]['fields'])) {
 				$this->fieldset[$model]['fields'] = $object->schema();
+				$objectAlias = $object->alias === null ? '' : $object->alias;
 				foreach ($object->hasAndBelongsToMany as $alias => $assocData) {
-					$this->fieldset[$object->alias]['fields'][$alias] = array('type' => 'multiple');
+					$this->fieldset[$objectAlias]['fields'][$alias] = array('type' => 'multiple');
 				}
 			}
 			if ($field === null || $field === false) {
@@ -1684,7 +1685,7 @@ class FormHelper extends AppHelper {
 				));
 			}
 		}
-		$out = $hidden . implode($separator, $out);
+		$out = $hidden . implode((string)$separator, $out);
 
 		if (is_array($between)) {
 			$between = '';
@@ -2300,7 +2301,7 @@ class FormHelper extends AppHelper {
 		$attributes += array('empty' => true, 'value' => null);
 		$attributes = $this->_dateTimeSelected('day', $fieldName, $attributes);
 
-		if (strlen($attributes['value']) > 2) {
+		if (strlen((string)$attributes['value']) > 2) {
 			$date = date_create($attributes['value']);
 			$attributes['value'] = null;
 			if ($date) {
@@ -2356,7 +2357,7 @@ class FormHelper extends AppHelper {
 			}
 		}
 
-		if (strlen($attributes['value']) > 4 || $attributes['value'] === 'now') {
+		if (strlen((string)$attributes['value']) > 4 || $attributes['value'] === 'now') {
 			$date = date_create($attributes['value']);
 			$attributes['value'] = null;
 			if ($date) {
@@ -2396,7 +2397,7 @@ class FormHelper extends AppHelper {
 		$attributes += array('empty' => true, 'value' => null);
 		$attributes = $this->_dateTimeSelected('month', $fieldName, $attributes);
 
-		if (strlen($attributes['value']) > 2) {
+		if (strlen((string)$attributes['value']) > 2) {
 			$date = date_create($attributes['value']);
 			$attributes['value'] = null;
 			if ($date) {
@@ -2441,7 +2442,7 @@ class FormHelper extends AppHelper {
 		$attributes += array('empty' => true, 'value' => null);
 		$attributes = $this->_dateTimeSelected('hour', $fieldName, $attributes);
 
-		if (strlen($attributes['value']) > 2) {
+		if (strlen((string)$attributes['value']) > 2) {
 			try {
 				$date = new DateTime($attributes['value']);
 				if ($format24Hours) {
@@ -2488,7 +2489,7 @@ class FormHelper extends AppHelper {
 		$attributes += array('empty' => true, 'value' => null);
 		$attributes = $this->_dateTimeSelected('min', $fieldName, $attributes);
 
-		if (strlen($attributes['value']) > 2) {
+		if (strlen((string)$attributes['value']) > 2) {
 			$date = date_create($attributes['value']);
 			$attributes['value'] = null;
 			if ($date) {
@@ -2767,9 +2768,7 @@ class FormHelper extends AppHelper {
 		}
 
 		if (is_numeric($value)) {
-			// @codingStandardsIgnoreStart
-			$value = @strftime('%Y-%m-%d %H:%M:%S', $value);
-			// @codingStandardsIgnoreEnd
+			$value = PHP81_BC\strftime('%Y-%m-%d %H:%M:%S', $value);
 		}
 		$meridian = 'am';
 		$pos = strpos($value, '-');
@@ -3024,7 +3023,7 @@ class FormHelper extends AppHelper {
 				} else {
 					for ($m = 1; $m <= 12; $m++) {
 						// @codingStandardsIgnoreStart
-						$data[sprintf("%02s", $m)] = @strftime("%m", mktime(1, 1, 1, $m, 1, 1999));
+						$data[sprintf("%02s", $m)] = PHP81_BC\strftime("%m", mktime(1, 1, 1, $m, 1, 1999));
 						// @codingStandardsIgnoreEnd
 					}
 				}

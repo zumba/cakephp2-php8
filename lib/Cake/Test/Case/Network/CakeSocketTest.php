@@ -24,6 +24,10 @@ App::uses('CakeSocket', 'Network');
  * @package       Cake.Test.Case.Network
  */
 class CakeSocketTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Socket = null;
 
 /**
  * setUp method
@@ -393,7 +397,11 @@ class CakeSocketTest extends CakeTestCase {
 			)
 		);
 		$this->Socket = new CakeSocket($config);
-		$this->Socket->connect();
+		try {
+			$this->Socket->connect();
+		} catch (SocketException $e) {
+			$this->markTestSkipped('Cannot test network, skipping.');
+		}
 		$result = $this->Socket->context();
 		$this->assertSame($config['context']['ssl']['capture_peer'], $result['ssl']['capture_peer']);
 	}
@@ -416,7 +424,11 @@ class CakeSocketTest extends CakeTestCase {
 		);
 		$this->Socket = new CakeSocket($config);
 
-		$this->Socket->connect();
+		try {
+			$this->Socket->connect();
+		} catch (SocketException $e) {
+			$this->markTestSkipped('Cannot test network, skipping.');
+		}
 		$result = $this->Socket->context();
 
 		$this->assertTrue($result['ssl']['verify_peer']);

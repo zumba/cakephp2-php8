@@ -26,6 +26,10 @@ class_exists('CakeSession');
  * @package       Cake.Test.Case.Model.Datasource.Session
  */
 class CacheSessionTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $storage = null;
 
 	protected static $_sessionBackup;
 

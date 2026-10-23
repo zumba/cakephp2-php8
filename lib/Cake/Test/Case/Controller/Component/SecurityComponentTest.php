@@ -140,6 +140,10 @@ class BrokenCallbackController extends Controller {
  * @package       Cake.Test.Case.Controller.Component
  */
 class SecurityComponentTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Security = null;
 
 /**
  * Controller property
@@ -162,6 +166,7 @@ class SecurityComponentTest extends CakeTestCase {
  */
 	public function setUp() : void {
 		parent::setUp();
+		$_SERVER['REQUEST_METHOD'] = 'GET';
 
 		$request = $this->getMock('CakeRequest', array('here'), array('posts/index', false));
 		$request->addParams(array('controller' => 'posts', 'action' => 'index'));
@@ -321,7 +326,7 @@ class SecurityComponentTest extends CakeTestCase {
  * @return void
  */
 	public function testRequireSecureSucceed() {
-		$_SERVER['REQUEST_METHOD'] = 'Secure';
+		$_SERVER['REQUEST_METHOD'] = 'GET';
 		$this->Controller->request['action'] = 'posted';
 		$_SERVER['HTTPS'] = 'on';
 		$this->Controller->Security->requireSecure('posted');

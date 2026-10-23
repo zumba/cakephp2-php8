@@ -86,6 +86,20 @@ class SchemaShellTestSchema extends CakeSchema {
  * @package       Cake.Test.Case.Console.Command
  */
 class SchemaShellTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Dispatcher = null;
+
+/**
+ * @var mixed
+ */
+	public $Shell = null;
+
+/**
+ * @var mixed
+ */
+	public $file = null;
 
 /**
  * Fixtures

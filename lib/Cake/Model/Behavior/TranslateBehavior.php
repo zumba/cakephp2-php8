@@ -86,11 +86,9 @@ class TranslateBehavior extends ModelBehavior {
 	public function setup(Model $Model, $config = array()) {
 		$db = ConnectionManager::getDataSource($Model->useDbConfig);
 		if (!$db->connected) {
-			trigger_error(
-				__d('cake_dev', 'Datasource %s for TranslateBehavior of model %s is not connected', $Model->useDbConfig, $Model->alias),
-				E_USER_ERROR
+			throw new CakeException(
+				__d('cake_dev', 'Datasource %s for TranslateBehavior of model %s is not connected', $Model->useDbConfig, $Model->alias)
 			);
-			return false;
 		}
 
 		$this->settings[$Model->alias] = array();
@@ -689,11 +687,9 @@ class TranslateBehavior extends ModelBehavior {
 
 				foreach (array('hasOne', 'hasMany', 'belongsTo', 'hasAndBelongsToMany') as $type) {
 					if (isset($Model->{$type}[$association]) || isset($Model->__backAssociation[$type][$association])) {
-						trigger_error(
-							__d('cake_dev', 'Association %s is already bound to model %s', $association, $Model->alias),
-							E_USER_ERROR
+						throw new CakeException(
+							__d('cake_dev', 'Association %s is already bound to model %s', $association, $Model->alias)
 						);
-						return false;
 					}
 				}
 				$associations[$association] = array_merge($default, array('conditions' => array(

@@ -35,7 +35,13 @@ class TestConsoleLog extends ConsoleLog {
 class TestCakeLog extends CakeLog {
 
 	public static function replace($key, &$engine) {
-		static::$_Collection->{$key} = $engine;
+		$property = new ReflectionProperty('ObjectCollection', '_loaded');
+		if (PHP_VERSION_ID < 80100) {
+			$property->setAccessible(true);
+		}
+		$loaded = $property->getValue(static::$_Collection);
+		$loaded[$key] = $engine;
+		$property->setValue(static::$_Collection, $loaded);
 	}
 
 }
@@ -140,7 +146,7 @@ class ConsoleLogTest extends CakeTestCase {
 			'engine' => 'TestConsole',
 			));
 		if ((DS === '\\' && !(bool)env('ANSICON') && env('ConEmuANSI') !== 'ON') ||
-			(function_exists('posix_isatty') && !posix_isatty(null))
+			function_exists('posix_isatty')
 		) {
 			$expected = ConsoleOutput::PLAIN;
 		} else {

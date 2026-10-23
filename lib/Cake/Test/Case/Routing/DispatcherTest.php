@@ -46,6 +46,11 @@ class DispatcherMockCakeResponse extends CakeResponse {
 class TestDispatcher extends Dispatcher {
 
 /**
+ * @var mixed
+ */
+	public $base = null;
+
+/**
  * Controller instance, made publicly available for testing
  *
  * @var Controller
@@ -537,6 +542,40 @@ class TestFilterDispatcher extends DispatcherFilter {
  * @package       Cake.Test.Case.Routing
  */
 class DispatcherTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	protected $_app = null;
+
+/**
+ * @var mixed
+ */
+	protected $_cache = null;
+
+/**
+ * @var mixed
+ */
+	protected $_debug = null;
+
+/**
+ * @var mixed
+ */
+	protected $_files = null;
+
+/**
+ * @var mixed
+ */
+	protected $_get = null;
+
+/**
+ * @var mixed
+ */
+	protected $_post = null;
+
+/**
+ * @var mixed
+ */
+	protected $_server = null;
 
 /**
  * setUp method

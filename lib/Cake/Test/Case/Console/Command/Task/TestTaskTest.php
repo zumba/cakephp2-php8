@@ -178,6 +178,25 @@ class TestTaskCommentsController extends Controller {
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class TestTaskTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Example = null;
+
+/**
+ * @var mixed
+ */
+	public $Task = null;
+
+/**
+ * @var mixed
+ */
+	public $TestTaskArticle = null;
+
+/**
+ * @var mixed
+ */
+	public $TestTaskComments = null;
 
 /**
  * Fixtures

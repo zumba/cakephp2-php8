@@ -58,6 +58,15 @@ class CacheTestController extends Controller {
  * @package       Cake.Test.Case.View.Helper
  */
 class CacheHelperTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Cache = null;
+
+/**
+ * @var mixed
+ */
+	public $Controller = null;
 
 /**
  * Checks if TMP/views is writable, and skips the case if it is not.

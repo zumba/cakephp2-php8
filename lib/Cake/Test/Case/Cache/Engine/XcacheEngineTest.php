@@ -24,6 +24,10 @@ App::uses('Cache', 'Cache');
  * @package       Cake.Test.Case.Cache.Engine
  */
 class XcacheEngineTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	protected $_cacheDisable = null;
 
 /**
  * setUp method

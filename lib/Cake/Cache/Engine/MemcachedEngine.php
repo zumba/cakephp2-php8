@@ -55,6 +55,14 @@ class MemcachedEngine extends CacheEngine {
 	public $settings = array();
 
 /**
+ * Contains the compiled group names
+ * (prefixed with the global configuration prefix)
+ *
+ * @var array
+ */
+	protected $_compiledGroupNames = array();
+
+/**
  * List of available serializer engines
  *
  * Memcached must be compiled with json and igbinary support to use these engines

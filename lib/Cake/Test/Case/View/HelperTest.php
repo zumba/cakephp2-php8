@@ -195,6 +195,15 @@ class TestHelper extends Helper {
  * @package       Cake.Test.Case.View
  */
 class HelperTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Helper = null;
+
+/**
+ * @var mixed
+ */
+	public $View = null;
 
 /**
  * setUp method

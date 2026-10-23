@@ -40,7 +40,7 @@ if (function_exists('ini_set')) {
 }
 
 if (!include $dispatcher) {
-	trigger_error('Could not locate CakePHP core files.', E_USER_ERROR);
+	throw new RuntimeException('Could not locate CakePHP core files.');
 }
 unset($dispatcher);
 

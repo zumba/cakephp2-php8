@@ -24,6 +24,10 @@ App::uses('PhpReader', 'Configure');
  * @package       Cake.Test.Case.Configure
  */
 class PhpReaderTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $path = null;
 
 /**
  * Test data to serialize and unserialize.

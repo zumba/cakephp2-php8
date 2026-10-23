@@ -33,6 +33,30 @@ App::uses('File', 'Utility');
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class PluginTaskTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Task = null;
+
+/**
+ * @var mixed
+ */
+	protected $_paths = null;
+
+/**
+ * @var mixed
+ */
+	protected $_testPath = null;
+
+/**
+ * @var mixed
+ */
+	public $in = null;
+
+/**
+ * @var mixed
+ */
+	public $out = null;
 
 /**
  * setUp method
@@ -68,7 +92,7 @@ class PluginTaskTest extends CakeTestCase {
  * @return void
  */
 	public function tearDown() : void {
-		if (file_exists($this->Task->bootstrap)) {
+		if ($this->Task->bootstrap !== null && file_exists($this->Task->bootstrap)) {
 			unlink($this->Task->bootstrap);
 		}
 		parent::tearDown();

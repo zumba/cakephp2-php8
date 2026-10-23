@@ -70,6 +70,15 @@ class ScaffoldViewMockController extends Controller {
  * @package       Cake.Test.Case.Controller
  */
 class ScaffoldViewTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Controller = null;
+
+/**
+ * @var mixed
+ */
+	public $request = null;
 
 /**
  * fixtures property

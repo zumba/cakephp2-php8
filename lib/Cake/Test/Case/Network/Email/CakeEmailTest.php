@@ -143,6 +143,15 @@ class ExtendTransport {
  * @package       Cake.Test.Case.Network.Email
  */
 class CakeEmailTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $CakeEmail = null;
+
+/**
+ * @var mixed
+ */
+	protected $_configFileExists = null;
 
 /**
  * setUp

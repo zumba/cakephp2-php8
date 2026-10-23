@@ -169,6 +169,10 @@ class ViewTaskArticlesController extends Controller {
  * @package       Cake.Test.Case.Console.Command.Task
  */
 class ViewTaskTest extends CakeTestCase {
+/**
+ * @var mixed
+ */
+	public $Task = null;
 
 /**
  * Fixtures
