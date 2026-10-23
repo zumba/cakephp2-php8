@@ -453,9 +453,10 @@ class CakeResponse {
  */
 	protected function _setCookies() {
 		foreach ($this->_cookies as $name => $c) {
+			// Applications may configure the path or domain as null; setcookie() no longer accepts it.
 			setcookie(
-				$name, $c['value'], $c['expire'], $c['path'],
-				$c['domain'], $c['secure'], $c['httpOnly']
+				$name, (string)$c['value'], (int)$c['expire'], (string)$c['path'],
+				(string)$c['domain'], (bool)$c['secure'], (bool)$c['httpOnly']
 			);
 		}
 	}
